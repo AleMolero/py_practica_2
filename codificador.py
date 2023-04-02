@@ -35,7 +35,7 @@ print(cadena.lower().translate(mytable))
 print('------+++++---------EJERCICIO---------+++++------')
 
 # este resuelve lo pedido... CASI
-# si se ingresa el último símbolo ASCII '~'... pone una "casita" (pensé q se iba a romper), o sea... sigue con otros por fuera de ASCII?
+# Si se ingresara el último símbolo posible.. daría error
 #con chr() y ord()
 
 corrimiento = 1
