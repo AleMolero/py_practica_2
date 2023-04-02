@@ -40,5 +40,5 @@ print('------+++++---------EJERCICIO---------+++++------')
 
 corrimiento = 1
 #corrimiento = int(input('ingrese valor para el corrimiento: '))
-cadena_codificada = ''.join(map(lambda letra: chr(ord(letra)+corrimiento), cadena))
+cadena_codificada = ''.join(map(lambda letra: chr(ord(letra) + corrimiento), cadena))
 print(cadena_codificada)
