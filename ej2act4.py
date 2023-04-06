@@ -65,7 +65,7 @@ for oration in evaluar[1]:
             #print(4)
 #en el rango la cota superior no se incluye
 print (tipo_oracion)
-
+#hay que contar el título??
 
 # longitudes = [len(oration.split()) for oration in evaluar[1]]
 # tipo_oracion = {

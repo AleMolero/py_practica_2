@@ -6,7 +6,7 @@ def DisplayBoard(board):
     # La función acepta un parámetro el cual contiene el estado actual del tablero
     # y lo muestra en la consola.
     # imprime tablero
-    for j in range(13):  # cambiar 13 por generico
+    for j in range(13):  
         for i in range(len(board[j])):
             print(board[j][i], end="")
         print("")
