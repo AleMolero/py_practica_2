@@ -34,6 +34,7 @@ def generador_diccio(nombres, notas_1, notas_2):
     lista_nombres = "".join([" " if letter in "'," else letter for letter in nombres])
     lista_nombres = lista_nombres.strip()
     lista_nombres = lista_nombres.split()
+    # lista_nombres = "".join([" " if letter in "'," else letter for letter in nombres]).strip().split() #condensado
     
     return {
         alumno: [nota_1, nota_2] #primero hice que las notas fueran una tupla, pero luego 
@@ -52,14 +53,15 @@ def calcular_prom_alumno(*args):
 def calcular_promedios_alumnos(registro_alumnos):
     """ Esta funcion recibe el diccionario de alumnos y sus notas y calcula el promedio 
     de las notas de cada alumno y retorna un diccionario con cada alumno y su promedio """
-    return {
-        alumno: (
-            calcular_prom_alumno(
-                registro_alumnos[alumno][0], registro_alumnos[alumno][1]
-            )
-        )
-        for alumno in registro_alumnos
-    }
+    # return {
+    #     alumno: (
+    #         calcular_prom_alumno(
+    #             registro_alumnos[alumno][0], registro_alumnos[alumno][1]
+    #         )
+    #     )
+    #     for alumno in registro_alumnos
+    # }
+    return dict(map(lambda alumno:(alumno[0], calcular_prom_alumno(*alumno[1])),registro_alumnos.items())) # desempaquetar con *
 
 
 # inciso3
@@ -76,7 +78,8 @@ def calcular_promedio_total(promedios):
 def identificar_alum_max_nota(promedios):
     """ Esta función recibe como parámetro el diccionario con los promedios de los alumnos y 
     retorna la clave del alumno con el mayor promedio  """
-    return (max(promedios, key = promedios.get))
+    return (max(promedios, key = promedios.get)) #alternativa 1
+   # return max(promedios.items(), key = lambda alumno:alumno[1])[0] #alternativa 2
 
 #alternativa mala
     # valor_max = max(promedios.values())
@@ -94,19 +97,19 @@ def identificar_alum_min_nota(registro_alumnos):  # analizar con map
     #     minimos.append(min(registro_alumnos[alumno]))
     #return (min(registro_alumnos, key = registro_alumnos.get))  
       
-    minimos = [min(registro_alumnos[alumno]) for alumno in registro_alumnos]
-    valor_min = min(minimos)
+  #  minimos = [min(registro_alumnos[alumno]) for alumno in registro_alumnos]
+ #   valor_min = min(minimos)
     
-    #valor_min = min(nota for notas in registro_alumnos.values() for nota in notas)
+    #valor_min = min(nota for notas in registro_alumnos.values() for nota in notas) 
     #valor_min = min(map(min, [zip(*registro_alumnos.values())]))
    
     #valor_min = min(map(lambda alumno: min(alumno), registro_alumnos.values()))    
     
-    indice = minimos.index(valor_min) 
-    minima =list(registro_alumnos.keys())[indice] 
+    # indice = minimos.index(valor_min) 
+   # minima =list(registro_alumnos.keys())[indice] 
     # minima = list(registro_alumnos.keys())[minimos.index(min(minimos))] #comprimido de las 2 líneas de arriba
     
-
+    minima = min(registro_alumnos.items(), key = lambda alumno: min(alumno[1]))[0]
     return minima
  
 
