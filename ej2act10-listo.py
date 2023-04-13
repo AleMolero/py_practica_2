@@ -78,14 +78,25 @@ def identificar_alum_min_nota(registro_alumnos):
 # ---------------------------------------------------------------------------------------------------------------
 # inciso1 -  Estructura base
 registro_alumnos = generador_diccio(nombres, notas_1, notas_2)
-print(f'Listado de alumnos y sus notas: {registro_alumnos}')
+#print(f'Listado de alumnos y sus notas: {registro_alumnos}')
+print(80* "_")
+print(f'Listado de alumnos y sus notas: ')
+print(80* "-")
+for alumno, notas in registro_alumnos.items():
+    print(f'{alumno:<10} -     notas: {notas}')  
+    #print(f'{alumno} - notas: {notas}')
+
+    
 print("")
-print(
-    "___________________________________________________________________________________________________________"
-)
+print(80* "_")
+
 # inciso2 - Calcular el promedio de notas de cada estudiante.
 promedios = calcular_promedios_alumnos(registro_alumnos)
-print(promedios)
+#print(promedios)
+print(f'Listado de alumnos con  promedio: ')
+print(80* "-")
+for alumno, notas in promedios.items():
+    print('{:<10} -     promedio: {:<5}'.format(alumno, notas))  
 
 print(
     "___________________________________________________________________________________________________________"
