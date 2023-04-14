@@ -32,14 +32,12 @@ def generador_diccio(nombres, notas_1, notas_2):
     """ Esta funcion crea un diccionario con cada nombre como clave y sus correspondientes 
     notas dentro de una tupla """
     lista_nombres = "".join([" " if letter in "'," else letter for letter in nombres])
-    lista_nombres = lista_nombres.strip()
+   # lista_nombres = lista_nombres.strip()
     lista_nombres = lista_nombres.split()
     # lista_nombres = "".join([" " if letter in "'," else letter for letter in nombres]).strip().split() #condensado
     
     return {
-        alumno: [nota_1, nota_2] #primero hice que las notas fueran una tupla, pero luego 
-                                # me decanté por lista, por si se agregan más notas o cambian
-        for alumno, nota_1, nota_2 in zip(lista_nombres, notas_1, notas_2)
+        alumno: [nota_1, nota_2] for alumno, nota_1, nota_2 in zip(lista_nombres, notas_1, notas_2)
     }
 
 
@@ -92,10 +90,12 @@ def identificar_alum_max_nota(promedios):
 def identificar_alum_min_nota(registro_alumnos):  # analizar con map
     """ Esta función recibe como parámetro el diccionario con loas alumnos y sus notas y
     retorna la clave del alumno con la menor nota  """
+    # forma 1
     # minimos =[]
     # for alumno in registro_alumnos:
     #     minimos.append(min(registro_alumnos[alumno]))
-    #return (min(registro_alumnos, key = registro_alumnos.get))  
+    # minima = (min(minimos, key = minimos.get))  
+    #-----------------------------------------------------------------------------------
       
   #  minimos = [min(registro_alumnos[alumno]) for alumno in registro_alumnos]
  #   valor_min = min(minimos)
@@ -107,6 +107,7 @@ def identificar_alum_min_nota(registro_alumnos):  # analizar con map
     
     # indice = minimos.index(valor_min) 
    # minima =list(registro_alumnos.keys())[indice] 
+   
     # minima = list(registro_alumnos.keys())[minimos.index(min(minimos))] #comprimido de las 2 líneas de arriba
     
     minima = min(registro_alumnos.items(), key = lambda alumno: min(alumno[1]))[0]

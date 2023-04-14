@@ -31,10 +31,10 @@ notas_2 = [30, 95, 28, 84, 84, 43, 66, 51, 4, 11, 58, 10, 13, 34, 96, 71, 86, 37
 def generador_diccio(nombres, notas_1, notas_2):
     """ Esta funcion crea un diccionario con cada nombre como clave y sus correspondientes 
     notas dentro de una tupla """
-    lista_nombres = "".join([" " if letter in "'," else letter for letter in nombres]).split()
-    print(lista_nombres)
+    lista_nombres = "".join([" " if letter in "'," else letter for letter in nombres]).strip().split() #condensado
+    
     return {
-        alumno: [nota_1, nota_2]                                
+        alumno: [[nota_1, nota_2] ,]                               
         for alumno, nota_1, nota_2 in zip(lista_nombres, notas_1, notas_2)
     }
 
@@ -49,8 +49,15 @@ def calcular_prom_alumno(*args):
 def calcular_promedios_alumnos(registro_alumnos):
     """ Esta funcion recibe el diccionario de alumnos y sus notas y calcula el promedio 
     de las notas de cada alumno y retorna un diccionario con cada alumno y su promedio """
-    return {map(lambda alumno:(alumno[0], calcular_prom_alumno(*alumno[1])),registro_alumnos.items())} 
-
+#    return dict(map(lambda alumno:(alumno[0], calcular_prom_alumno(*alumno[1])),registro_alumnos.items())) 
+    for alumno in registro_alumnos.items():
+        alumno[1].append( calcular_prom_alumno(*alumno[0])  ) 
+    
+    return registro_alumnos
+# {
+#         registro_alumnos[alumno].append( calcular_prom_alumno(*alumno[0])  )                      
+#         for alumno in registro_alumnos
+#     }
 
 # inciso3
 def calcular_promedio_total(promedios):
@@ -79,16 +86,16 @@ def identificar_alum_min_nota(registro_alumnos):
 # inciso1 -  Estructura base
 registro_alumnos = generador_diccio(nombres, notas_1, notas_2)
 #print(f'Listado de alumnos y sus notas: {registro_alumnos}')
-print(80 * "_")
+print(80* "_")
 print(f'Listado de alumnos y sus notas: ')
-print(80 * "-")
+print(80* "-")
 for alumno, notas in registro_alumnos.items():
     print(f'{alumno:<10} -     notas: {notas}')  
     #print(f'{alumno} - notas: {notas}')
 
     
 print("")
-print(80 * "_")
+print(80* "_")
 
 # inciso2 - Calcular el promedio de notas de cada estudiante.
 promedios = calcular_promedios_alumnos(registro_alumnos)
@@ -96,7 +103,7 @@ promedios = calcular_promedios_alumnos(registro_alumnos)
 print(f'Listado de alumnos con  promedio: ')
 print(80* "-")
 for alumno, notas in promedios.items():
-    print(f'{alumno:<10} -     promedio: {notas:<5}')  
+    print('{:<10} -     promedio: {:<5}'.format(alumno, notas))  
 
 print(
     "___________________________________________________________________________________________________________"
